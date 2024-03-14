@@ -1,0 +1,29 @@
+<?php
+
+namespace [namespace];
+
+use Livewire\Component;
+use Illuminate\Support\Str;
+
+class [class] extends Component
+{
+  public function render()
+  {
+    $data['page_title'] = Str::title(__('[module]::app.[component]'));
+    $data['cards'] = [
+      [
+        'components' => [
+          [
+            'name'   => '[module]::[component].table',
+            'params' => []
+          ],
+          [
+            'name'   => '[module]::[component].form',
+            'params' => []
+          ]
+        ]
+      ],
+    ];
+    return view('partials.page-index', $data);
+  }
+}

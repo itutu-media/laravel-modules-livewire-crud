@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace ITUTUMedia\LaravelModulesLivewireCrud;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use ITUTUMedia\LaravelModulesLivewireCrud\Commands\LaravelModulesLivewireCrudCommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class LaravelModulesLivewireCrudServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,10 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('laravel-modules-livewire-crud')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_skeleton_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_laravel-modules-livewire-crud_table')
+            ->hasCommand(LaravelModulesLivewireCrudCommand::class);
     }
 }

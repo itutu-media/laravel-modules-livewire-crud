@@ -1,0 +1,27 @@
+<?php
+
+namespace [namespace];
+
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Modules\Core\App\Traits\ExtendWithSearch;
+use [model_import];
+
+class [class] extends DataTableComponent
+{
+  use ExtendWithSearch;
+  
+  protected $model = [model]::class;
+
+  public function configure(): void
+  {
+    $this->setPrimaryKey('id');
+  }
+
+  public function columns(): array
+  {
+    return [
+      [columns]
+    ];
+  }
+}
