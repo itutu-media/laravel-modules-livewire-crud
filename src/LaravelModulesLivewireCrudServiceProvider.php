@@ -2,9 +2,9 @@
 
 namespace ITUTUMedia\LaravelModulesLivewireCrud;
 
+use ITUTUMedia\LaravelModulesLivewireCrud\Commands\LaravelModulesLivewireCrudCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use ITUTUMedia\LaravelModulesLivewireCrud\Commands\LaravelModulesLivewireCrudCommand;
 
 class LaravelModulesLivewireCrudServiceProvider extends PackageServiceProvider
 {

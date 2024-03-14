@@ -31,7 +31,7 @@ trait ComponentParser
             return false;
         }
 
-        if (!$module = $this->getModule()) {
+        if (! $module = $this->getModule()) {
             return false;
         }
 
@@ -103,23 +103,23 @@ trait ComponentParser
         $moduleLivewireNamespace = 'App\\Actions';
 
         $classDir = (string) Str::of($modulePath)
-            ->append('/' . $moduleLivewireNamespace)
+            ->append('/'.$moduleLivewireNamespace)
             ->replace(['\\'], '/');
 
         $classPath = $this->directories->implode('/');
 
         $namespace = $this->getNamespace($classPath, $moduleLivewireNamespace);
 
-        $namespace = Str::replace('\\' . $this->directories->first(), '', $namespace);
+        $namespace = Str::replace('\\'.$this->directories->first(), '', $namespace);
 
-        $className = $this->directories->first() . 'Action';
+        $className = $this->directories->first().'Action';
 
-        $sourcePath = $this->getSourcePath($classDir . '/' . $className . '.php');
+        $sourcePath = $this->getSourcePath($classDir.'/'.$className.'.php');
 
         return (object) [
             'dir' => $classDir,
             'path' => $classPath,
-            'file' => $classDir . '/' . $className . '.php',
+            'file' => $classDir.'/'.$className.'.php',
             'namespace' => $namespace,
             'name' => $className,
             'source' => $sourcePath,
@@ -133,23 +133,23 @@ trait ComponentParser
         $moduleLivewireNamespace = 'App\\Http\\Requests';
 
         $classDir = (string) Str::of($modulePath)
-            ->append('/' . $moduleLivewireNamespace)
+            ->append('/'.$moduleLivewireNamespace)
             ->replace(['\\'], '/');
 
         $classPath = $this->directories->implode('/');
 
         $namespace = $this->getNamespace($classPath, $moduleLivewireNamespace);
 
-        $namespace = Str::replace('\\' . $this->directories->first(), '', $namespace);
+        $namespace = Str::replace('\\'.$this->directories->first(), '', $namespace);
 
-        $className = $this->directories->first() . 'Request';
+        $className = $this->directories->first().'Request';
 
-        $sourcePath = $this->getSourcePath($classDir . '/' . $className . '.php');
+        $sourcePath = $this->getSourcePath($classDir.'/'.$className.'.php');
 
         return (object) [
             'dir' => $classDir,
             'path' => $classPath,
-            'file' => $classDir . '/' . $className . '.php',
+            'file' => $classDir.'/'.$className.'.php',
             'namespace' => $namespace,
             'name' => $className,
             'source' => $sourcePath,
@@ -165,19 +165,19 @@ trait ComponentParser
         $classPath = $this->directories->implode('/');
 
         $classDir = (string) Str::of($modulePath)
-            ->append('/' . $moduleLivewireNamespace . '/' . $classPath)
+            ->append('/'.$moduleLivewireNamespace.'/'.$classPath)
             ->replace(['\\'], '/');
 
         $namespace = $this->getNamespace($classPath);
 
         $className = 'Index';
 
-        $sourcePath = $this->getSourcePath($classDir . '/' . $className . '.php');
+        $sourcePath = $this->getSourcePath($classDir.'/'.$className.'.php');
 
         return (object) [
             'dir' => $classDir,
             'path' => $classPath,
-            'file' => $classDir . '/' . $className . '.php',
+            'file' => $classDir.'/'.$className.'.php',
             'namespace' => $namespace,
             'name' => $className,
             'source' => $sourcePath,
@@ -193,19 +193,19 @@ trait ComponentParser
         $classPath = $this->directories->implode('/');
 
         $classDir = (string) Str::of($modulePath)
-            ->append('/' . $moduleLivewireNamespace . '/' . $classPath)
+            ->append('/'.$moduleLivewireNamespace.'/'.$classPath)
             ->replace(['\\'], '/');
 
         $namespace = $this->getNamespace($classPath);
 
         $className = 'Table';
 
-        $sourcePath = $this->getSourcePath($classDir . '/' . $className . '.php');
+        $sourcePath = $this->getSourcePath($classDir.'/'.$className.'.php');
 
         return (object) [
             'dir' => $classDir,
             'path' => $classPath,
-            'file' => $classDir . '/' . $className . '.php',
+            'file' => $classDir.'/'.$className.'.php',
             'namespace' => $namespace,
             'name' => $className,
             'source' => $sourcePath,
@@ -221,19 +221,19 @@ trait ComponentParser
         $classPath = $this->directories->implode('/');
 
         $classDir = (string) Str::of($modulePath)
-            ->append('/' . $moduleLivewireNamespace . '/' . $classPath)
+            ->append('/'.$moduleLivewireNamespace.'/'.$classPath)
             ->replace(['\\'], '/');
 
         $namespace = $this->getNamespace($classPath);
 
         $className = 'Form';
 
-        $sourcePath = $this->getSourcePath($classDir . '/' . $className . '.php');
+        $sourcePath = $this->getSourcePath($classDir.'/'.$className.'.php');
 
         return (object) [
             'dir' => $classDir,
             'path' => $classPath,
-            'file' => $classDir . '/' . $className . '.php',
+            'file' => $classDir.'/'.$className.'.php',
             'namespace' => $namespace,
             'name' => $className,
             'source' => $sourcePath,
@@ -252,13 +252,13 @@ trait ComponentParser
             $path = strtr($this->option('view'), ['.' => '/']);
         }
 
-        $sourcePath = $this->getSourcePath($moduleLivewireViewDir . '/' . $path . '.blade.php');
+        $sourcePath = $this->getSourcePath($moduleLivewireViewDir.'/'.$path.'.blade.php');
 
         return (object) [
             'dir' => $moduleLivewireViewDir,
             'path' => $path,
             'folder' => Str::after($moduleLivewireViewDir, 'views/'),
-            'file' => $moduleLivewireViewDir . '/' . $path . '.blade.php',
+            'file' => $moduleLivewireViewDir.'/'.$path.'.blade.php',
             'name' => strtr($path, ['/' => '.']),
             'source' => $sourcePath,
         ];
@@ -266,34 +266,34 @@ trait ComponentParser
 
     protected function getStubInfo()
     {
-        $defaultStubDir = __DIR__ . '/../../stubs/';
+        $defaultStubDir = __DIR__.'/../../stubs/';
 
         $stubDir = File::isDirectory($publishedStubDir = base_path('stubs/modules-livewire-table/'))
             ? $publishedStubDir
             : $defaultStubDir;
 
-        $classStub = File::exists($stubDir . 'index.stub')
-            ? $stubDir . 'index.stub'
-            : $defaultStubDir . 'index.stub';
+        $classStub = File::exists($stubDir.'index.stub')
+            ? $stubDir.'index.stub'
+            : $defaultStubDir.'index.stub';
 
-        $tableStub = File::exists($stubDir . 'table.stub')
-            ? $stubDir . 'table.stub'
-            : $defaultStubDir . 'table.stub';
+        $tableStub = File::exists($stubDir.'table.stub')
+            ? $stubDir.'table.stub'
+            : $defaultStubDir.'table.stub';
 
-        $formClassStub = File::exists($stubDir . 'form.stub')
-            ? $stubDir . 'form.stub'
-            : $defaultStubDir . 'form.stub';
-        $formViewStub = File::exists($stubDir . 'form.blade.stub')
-            ? $stubDir . 'form.blade.stub'
-            : $defaultStubDir . 'form.blade.stub';
+        $formClassStub = File::exists($stubDir.'form.stub')
+            ? $stubDir.'form.stub'
+            : $defaultStubDir.'form.stub';
+        $formViewStub = File::exists($stubDir.'form.blade.stub')
+            ? $stubDir.'form.blade.stub'
+            : $defaultStubDir.'form.blade.stub';
 
-        $actionStub = File::exists($stubDir . 'action.stub')
-            ? $stubDir . 'action.stub'
-            : $defaultStubDir . 'action.stub';
+        $actionStub = File::exists($stubDir.'action.stub')
+            ? $stubDir.'action.stub'
+            : $defaultStubDir.'action.stub';
 
-        $requestStub = File::exists($stubDir . 'request.stub')
-            ? $stubDir . 'request.stub'
-            : $defaultStubDir . 'request.stub';
+        $requestStub = File::exists($stubDir.'request.stub')
+            ? $stubDir.'request.stub'
+            : $defaultStubDir.'request.stub';
 
         return (object) [
             'dir' => $stubDir,
@@ -319,7 +319,7 @@ trait ComponentParser
                 continue;
             }
 
-            $data[] = '$this->data[' . "'" . $field . "'" . '] = $newData[' . "'" . $field . "'" . '];';
+            $data[] = '$this->data['."'".$field."'".'] = $newData['."'".$field."'".'];';
         }
 
         $data = implode("\n\t\t", $data);
@@ -344,7 +344,7 @@ trait ComponentParser
                 continue;
             }
 
-            $rules[] = "'" . $field . "'" . ' => ' . "'" . 'required' . "'";
+            $rules[] = "'".$field."'".' => '."'".'required'."'";
         }
 
         $rules = implode(",\n\t\t\t", $rules);
@@ -408,9 +408,9 @@ trait ComponentParser
             $title = Str::of($field)->replace('_', ' ')->ucfirst();
 
             if ($field === $model->getKeyName() && view()->exists('partials.table.action-button')) {
-                $columns[] = 'Column::make("' . $title . '", "' . $field . '")' . "\n\t\t\t\t" . '->view("partials.table.action-button"),';
+                $columns[] = 'Column::make("'.$title.'", "'.$field.'")'."\n\t\t\t\t".'->view("partials.table.action-button"),';
             } else {
-                $columns[] = 'Column::make("' . $title . '", "' . $field . '")' . "\n\t\t\t\t" . '->sortable(),';
+                $columns[] = 'Column::make("'.$title.'", "'.$field.'")'."\n\t\t\t\t".'->sortable(),';
             }
         }
 
@@ -434,9 +434,9 @@ trait ComponentParser
                 continue;
             }
 
-            $fields[] = '$' . $field;
+            $fields[] = '$'.$field;
             $resetFields[] = "'$field'";
-            $setData[] = '$this->' . $field . ' = $this->state->' . $field . ';';
+            $setData[] = '$this->'.$field.' = $this->state->'.$field.';';
         }
 
         $fields = implode(',', $fields);
@@ -445,7 +445,7 @@ trait ComponentParser
 
         return preg_replace(
             ['/\[namespace\]/', '/\[class\]/', '/\[module\]/', '/\[model\]/', '/\[model_import\]/', '/\[model_low_case\]/', '/\[action_import\]/', '/\[request_import\]/', '/\[title\]/', '/\[fields\]/', '/\[resetFields\]/', '/\[setData\]/', '/\[action\]/', '/\[request\]/'],
-            [$this->component->formClass->namespace, $this->component->formClass->name, $this->getModuleLowerName(), $this->getModelName(), $this->getModelImport(), Str::lower($this->getModelName()), $this->getActionImport(), $this->getRequestImport(), Str::title($this->component->formClass->name . ' Form'), $fields, $resetFields, $setData, $this->component->action->name, $this->component->request->name],
+            [$this->component->formClass->namespace, $this->component->formClass->name, $this->getModuleLowerName(), $this->getModelName(), $this->getModelImport(), Str::lower($this->getModelName()), $this->getActionImport(), $this->getRequestImport(), Str::title($this->component->formClass->name.' Form'), $fields, $resetFields, $setData, $this->component->action->name, $this->component->request->name],
             $template,
         );
     }
@@ -472,7 +472,7 @@ trait ComponentParser
                 continue;
             }
 
-            $forms[] = '<x-input id="' . $field . '" label="' . Str::replace('_', ' ', Str::title($field)) . '" placeholder="' . Str::replace('_', ' ', Str::title($field)) . '" required :disabled="$disable" wire:model="' . Str::replace('_', ' ', Str::title($field)) . '" />';
+            $forms[] = '<x-input id="'.$field.'" label="'.Str::replace('_', ' ', Str::title($field)).'" placeholder="'.Str::replace('_', ' ', Str::title($field)).'" required :disabled="$disable" wire:model="'.Str::replace('_', ' ', Str::title($field)).'" />';
         }
 
         return implode("\n\t\t", $forms);

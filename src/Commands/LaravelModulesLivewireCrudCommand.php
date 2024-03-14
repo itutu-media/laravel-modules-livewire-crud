@@ -26,15 +26,15 @@ class LaravelModulesLivewireCrudCommand extends Command
      */
     public function handle()
     {
-        if (!$this->parser()) {
+        if (! $this->parser()) {
             return false;
         }
 
-        if (!$this->checkClassNameValid()) {
+        if (! $this->checkClassNameValid()) {
             return false;
         }
 
-        if (!$this->checkReservedClassName()) {
+        if (! $this->checkReservedClassName()) {
             return false;
         }
 
@@ -69,7 +69,7 @@ class LaravelModulesLivewireCrudCommand extends Command
     {
         $actionFile = $this->component->action->file;
 
-        if (File::exists($actionFile) && !$this->isForce()) {
+        if (File::exists($actionFile) && ! $this->isForce()) {
             $this->line("<options=bold,reverse;fg=red> WHOOPS-IE-TOOTLES </> 😳 \n");
             $this->line("<fg=red;options=bold>Action already exists:</> {$this->component->action->source}");
 
@@ -87,7 +87,7 @@ class LaravelModulesLivewireCrudCommand extends Command
     {
         $requestFile = $this->component->request->file;
 
-        if (File::exists($requestFile) && !$this->isForce()) {
+        if (File::exists($requestFile) && ! $this->isForce()) {
             $this->line("<options=bold,reverse;fg=red> WHOOPS-IE-TOOTLES </> 😳 \n");
             $this->line("<fg=red;options=bold>Request already exists:</> {$this->component->request->source}");
 
@@ -105,7 +105,7 @@ class LaravelModulesLivewireCrudCommand extends Command
     {
         $classFile = $this->component->indexClass->file;
 
-        if (File::exists($classFile) && !$this->isForce()) {
+        if (File::exists($classFile) && ! $this->isForce()) {
             $this->line("<options=bold,reverse;fg=red> WHOOPS-IE-TOOTLES </> 😳 \n");
             $this->line("<fg=red;options=bold>Class already exists:</> {$this->component->indexClass->source}");
 
@@ -123,7 +123,7 @@ class LaravelModulesLivewireCrudCommand extends Command
     {
         $tableFile = $this->component->table->file;
 
-        if (File::exists($tableFile) && !$this->isForce()) {
+        if (File::exists($tableFile) && ! $this->isForce()) {
             $this->line("<options=bold,reverse;fg=red> WHOOPS-IE-TOOTLES </> 😳 \n");
             $this->line("<fg=red;options=bold>Table already exists:</> {$this->component->table->source}");
 
@@ -141,7 +141,7 @@ class LaravelModulesLivewireCrudCommand extends Command
     {
         $formFile = $this->component->formClass->file;
 
-        if (File::exists($formFile) && !$this->isForce()) {
+        if (File::exists($formFile) && ! $this->isForce()) {
             $this->line("<options=bold,reverse;fg=red> WHOOPS-IE-TOOTLES </> 😳 \n");
             $this->line("<fg=red;options=bold>Form class already exists:</> {$this->component->formClass->source}");
 
@@ -163,7 +163,7 @@ class LaravelModulesLivewireCrudCommand extends Command
 
         $formFile = $this->component->formView->file;
 
-        if (File::exists($formFile) && !$this->isForce()) {
+        if (File::exists($formFile) && ! $this->isForce()) {
             $this->line("<fg=red;options=bold>Form view already exists:</> {$this->component->formView->source}");
 
             return false;

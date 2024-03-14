@@ -24,7 +24,7 @@ trait CommandHelper
 
     protected function ensureDirectoryExists($path)
     {
-        if (!File::isDirectory(dirname($path))) {
+        if (! File::isDirectory(dirname($path))) {
             File::makeDirectory(dirname($path), 0777, $recursive = true, $force = true);
         }
     }
@@ -38,12 +38,12 @@ trait CommandHelper
 
             $path = $module['path'] ?? '';
 
-            if (!$module || !File::isDirectory($path)) {
+            if (! $module || ! File::isDirectory($path)) {
                 $this->line("<options=bold,reverse;fg=red> WHOOPS! </> 😳 \n");
 
                 $path && $this->line("<fg=red;options=bold>The custom {$moduleName} module not found in this path - {$path}.</>");
 
-                !$path && $this->line("<fg=red;options=bold>The custom {$moduleName} module not found.</>");
+                ! $path && $this->line("<fg=red;options=bold>The custom {$moduleName} module not found.</>");
 
                 return null;
             }
@@ -51,7 +51,7 @@ trait CommandHelper
             return $moduleName;
         }
 
-        if (!$module = $this->laravel['modules']->find($moduleName)) {
+        if (! $module = $this->laravel['modules']->find($moduleName)) {
             $this->line("<options=bold,reverse;fg=red> WHOOPS! </> 😳 \n");
             $this->line("<fg=red;options=bold>The {$moduleName} module not found.</>");
 
@@ -110,7 +110,7 @@ trait CommandHelper
             $moduleLivewireViewDir = config("modules-livewire.custom_modules.{$this->module}.view", $moduleLivewireViewDir);
         }
 
-        return $this->getModulePath() . '/' . $moduleLivewireViewDir;
+        return $this->getModulePath().'/'.$moduleLivewireViewDir;
     }
 
     protected function getModel()
@@ -127,12 +127,12 @@ trait CommandHelper
 
     protected function getModelImport(): string
     {
-        if (File::exists(app_path('Models/' . $this->model . '.php'))) {
-            return 'App\Models\\' . $this->model;
+        if (File::exists(app_path('Models/'.$this->model.'.php'))) {
+            return 'App\Models\\'.$this->model;
         }
 
-        if (File::exists(app_path($this->model . '.php'))) {
-            return 'App\\' . $this->model;
+        if (File::exists(app_path($this->model.'.php'))) {
+            return 'App\\'.$this->model;
         }
 
         return str_replace('/', '\\', $this->model);
@@ -140,23 +140,23 @@ trait CommandHelper
 
     protected function getActionImport(): string
     {
-        return $this->component->action->namespace . '\\' . $this->component->action->name;
+        return $this->component->action->namespace.'\\'.$this->component->action->name;
     }
 
     protected function getRequestImport(): string
     {
-        return $this->component->request->namespace . '\\' . $this->component->request->name;
+        return $this->component->request->namespace.'\\'.$this->component->request->name;
     }
 
     protected function getNamespace($classPath, $namespace = null)
     {
-        $classPath = Str::contains($classPath, '/') ? '/' . $classPath : '';
+        $classPath = Str::contains($classPath, '/') ? '/'.$classPath : '';
 
         $namespace = $namespace ?: $this->getModuleLivewireNamespace();
 
         $prefix = $this->isCustomModule()
-            ? $this->getModuleNamespace() . '\\' . $namespace
-            : $this->getModuleNamespace() . '\\' . $this->module->getName() . '\\' . $namespace;
+            ? $this->getModuleNamespace().'\\'.$namespace
+            : $this->getModuleNamespace().'\\'.$this->module->getName().'\\'.$namespace;
 
         return (string) Str::of($classPath)
             ->beforeLast('/')
@@ -166,7 +166,7 @@ trait CommandHelper
 
     protected function checkClassNameValid()
     {
-        if (!$this->isClassNameValid($name = $this->component->indexClass->name)) {
+        if (! $this->isClassNameValid($name = $this->component->indexClass->name)) {
             $this->line("<options=bold,reverse;fg=red> WHOOPS! </> 😳 \n");
             $this->line("<fg=red;options=bold>Class is invalid:</> {$name}");
 
@@ -200,6 +200,6 @@ trait CommandHelper
 
     protected function getSourcePath($file, $path = null)
     {
-        return Str::after($file, strtr(base_path($path), ['\\' => '/']) . '/');
+        return Str::after($file, strtr(base_path($path), ['\\' => '/']).'/');
     }
 }
