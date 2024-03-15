@@ -252,13 +252,13 @@ trait ComponentParser
             $path = strtr($this->option('view'), ['.' => '/']);
         }
 
-        $sourcePath = $this->getSourcePath($moduleLivewireViewDir . '/' . $path . '.blade.php');
+        $sourcePath = $this->getSourcePath($moduleLivewireViewDir . '/' . $path . '/form.blade.php');
 
         return (object) [
             'dir' => $moduleLivewireViewDir,
             'path' => $path,
             'folder' => Str::after($moduleLivewireViewDir, 'views/'),
-            'file' => $moduleLivewireViewDir . '/' . $path . '.blade.php',
+            'file' => $moduleLivewireViewDir . '/' . $path . '/form.blade.php',
             'name' => strtr($path, ['/' => '.']),
             'source' => $sourcePath,
         ];
@@ -325,8 +325,8 @@ trait ComponentParser
         $data = implode("\n\t\t", $data);
 
         return preg_replace(
-            ['/\[namespace\]/', '/\[model_import\]/', '/\[class\]/', '/\[data\]/', '/\[model\]/'],
-            [$this->component->action->namespace, $this->getModelImport(), $this->component->action->name, $data, Str::lower($this->getModelName())],
+            ['/\[date\]/', '/\[namespace\]/', '/\[model_import\]/', '/\[class\]/', '/\[data\]/', '/\[model\]/'],
+            [date('Y-m-d H:i:s') . ' ' . date_default_timezone_get(), $this->component->action->namespace, $this->getModelImport(), $this->component->action->name, $data, Str::lower($this->getModelName())],
             file_get_contents($this->component->stub->action),
         );
     }
@@ -350,8 +350,8 @@ trait ComponentParser
         $rules = implode(",\n\t\t\t", $rules);
 
         return preg_replace(
-            ['/\[namespace\]/', '/\[model_import\]/', '/\[class\]/', '/\[data\]/', '/\[model\]/', '/\[rules\]/'],
-            [$this->component->request->namespace, $this->getModelImport(), $this->component->request->name, '', Str::lower($this->getModelName()), $rules],
+            ['/\[date\]/', '/\[namespace\]/', '/\[model_import\]/', '/\[class\]/', '/\[data\]/', '/\[model\]/', '/\[rules\]/'],
+            [date('Y-m-d H:i:s') . ' ' . date_default_timezone_get(), $this->component->request->namespace, $this->getModelImport(), $this->component->request->name, '', Str::lower($this->getModelName()), $rules],
             file_get_contents($this->component->stub->request),
         );
     }
@@ -367,8 +367,8 @@ trait ComponentParser
         $component = Str::lower($this->directories->implode('.'));
 
         return preg_replace(
-            ['/\[namespace\]/', '/\[class\]/', '/\[module\]/', '/\[component\]/'],
-            [$this->component->indexClass->namespace, $this->component->indexClass->name, $this->getModuleLowerName(), $component],
+            ['/\[date\]/', '/\[namespace\]/', '/\[class\]/', '/\[module\]/', '/\[component\]/'],
+            [date('Y-m-d H:i:s') . ' ' . date_default_timezone_get(), $this->component->indexClass->namespace, $this->component->indexClass->name, $this->getModuleLowerName(), $component],
             $template,
         );
     }
@@ -378,8 +378,8 @@ trait ComponentParser
         $template = file_get_contents($this->component->stub->table);
 
         return preg_replace(
-            ['/\[namespace\]/', '/\[class\]/', '/\[model\]/', '/\[model_import\]/', '/\[columns\]/'],
-            [$this->component->table->namespace, $this->component->table->name, $this->getModelName(), $this->getModelImport(), $this->generateColumns($this->getModelImport())],
+            ['/\[date\]/', '/\[namespace\]/', '/\[class\]/', '/\[model\]/', '/\[model_import\]/', '/\[columns\]/', '/\[action_import\]/', '/\[module\]/', '/\[model_low_case\]/', '/\[action\]/'],
+            [date('Y-m-d H:i:s') . ' ' . date_default_timezone_get(), $this->component->table->namespace, $this->component->table->name, $this->getModelName(), $this->getModelImport(), $this->generateColumns($this->getModelImport()), $this->getActionImport(), $this->getModuleLowerName(), $this->component->formView->name, $this->component->action->name],
             $template,
         );
     }
@@ -444,8 +444,8 @@ trait ComponentParser
         $setData = implode("\n\t\t", $setData);
 
         return preg_replace(
-            ['/\[namespace\]/', '/\[class\]/', '/\[module\]/', '/\[model\]/', '/\[model_import\]/', '/\[model_low_case\]/', '/\[action_import\]/', '/\[request_import\]/', '/\[title\]/', '/\[fields\]/', '/\[resetFields\]/', '/\[setData\]/', '/\[action\]/', '/\[request\]/'],
-            [$this->component->formClass->namespace, $this->component->formClass->name, $this->getModuleLowerName(), $this->getModelName(), $this->getModelImport(), Str::lower($this->getModelName()), $this->getActionImport(), $this->getRequestImport(), Str::title($this->component->formClass->name . ' Form'), $fields, $resetFields, $setData, $this->component->action->name, $this->component->request->name],
+            ['/\[date\]/', '/\[namespace\]/', '/\[class\]/', '/\[module\]/', '/\[model\]/', '/\[model_import\]/', '/\[model_low_case\]/', '/\[action_import\]/', '/\[request_import\]/', '/\[title\]/', '/\[fields\]/', '/\[resetFields\]/', '/\[setData\]/', '/\[action\]/', '/\[request\]/'],
+            [date('Y-m-d H:i:s') . ' ' . date_default_timezone_get(), $this->component->formClass->namespace, $this->component->formClass->name, $this->getModuleLowerName(), $this->getModelName(), $this->getModelImport(), Str::lower($this->getModelName()), $this->getActionImport(), $this->getRequestImport(), Str::title($this->component->formClass->name . ' Form'), $fields, $resetFields, $setData, $this->component->action->name, $this->component->request->name],
             $template,
         );
     }
@@ -453,8 +453,8 @@ trait ComponentParser
     protected function getFormViewContents()
     {
         return preg_replace(
-            '/\[forms\]/',
-            $this->getForms(),
+            ['/\[date\]/', '/\[forms\]/'],
+            [date('Y-m-d H:i:s') . ' ' . date_default_timezone_get(), $this->getForms()],
             file_get_contents($this->component->stub->formView),
         );
     }
