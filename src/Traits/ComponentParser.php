@@ -434,9 +434,9 @@ trait ComponentParser
                 continue;
             }
 
-            $fields[] = '$' . Str::camel($field);
-            $resetFields[] = "'" . Str::camel($field) . "'";
-            $setData[] = '$this->' . $field . ' = $this->state->' . $field . ';';
+            $fields[] = '$'.Str::camel($field);
+            $resetFields[] = "'".Str::camel($field)."'";
+            $setData[] = '$this->'.$field.' = $this->state->'.$field.';';
         }
 
         $fields = implode(', ', $fields);
