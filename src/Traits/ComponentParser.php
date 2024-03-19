@@ -435,7 +435,7 @@ trait ComponentParser
             }
 
             $fields[] = '$' . Str::camel($field);
-            $resetFields[] = "'$field'";
+            $resetFields[] = "'" . Str::camel($field) . "'";
             $setData[] = '$this->' . $field . ' = $this->state->' . $field . ';';
         }
 
