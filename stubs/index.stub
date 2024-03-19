@@ -14,7 +14,7 @@ class [class] extends Component
 {
   public function render()
   {
-    $data['page_title'] = Str::title(__('[module]::app.[component]'));
+    $data['page_title'] = Str::title(__('[module]::app.[component].index'));
     $data['cards'] = [
       [
         'components' => [
